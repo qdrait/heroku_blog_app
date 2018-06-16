@@ -1,5 +1,9 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
+  # before_action :accept_blog, only: [:new, :show, :edit, :update, :destroy]
+  # before_action :accept_blog, except: [:index]
+  #やっぱりログインしてからblog見れるようにしたいので、下記に。
+  before_action :accept_blog,
 
   def index
     @blogs = Blog.all
@@ -57,5 +61,9 @@ class BlogsController < ApplicationController
 
     def blog_params
       params.require(:blog).permit(:title, :content)
+    end
+    
+    def accept_blog
+      redirect_to new_session_path if !logged_in?
     end
 end
