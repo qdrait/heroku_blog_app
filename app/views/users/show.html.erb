@@ -1,3 +1,43 @@
 <h1><%= @user.name %>のページ</h1>
 
 <p>メールアドレス: <%= @user.email %></p>
+
+
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th class="col-xs-1">id</th>
+      <th class="col-xs-1">気</th>
+      <th class="col-xs-2">タイトル</th>
+      <th class="col-xs-4">内容</th>
+      <th class="col-xs-1">登録者</th>
+      <th class="col-xs-4" colspan=3>コンテンツ操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @favorite_blogs.each do |blog| %>
+      <tr>
+        <td class="col-xs-1"><%= blog.id %></td>
+        <td class="col-xs-1">
+          <% if current_user.favorites.find_by(blog_id: blog.id).present? %>
+            ★
+          <% else %>
+          <% end %>
+        </td>
+        <td class="col-xs-2"><%= blog.title %></td>
+        <td class="col-xs-4"><%= blog.content %></td>
+        <td class="col-xs-1"><%= blog.user.name %></td>
+        <td class="col-xs-1"><%= link_to '参照', blog, class: "btn btn-primary" %></td>
+        <% if current_user.id == blog.user_id%>
+          <td class="col-xs-1"><%= link_to '編集', edit_blog_path(blog), class: "btn btn-primary color-white" %></td>
+          <td class="col-xs-1"><%= link_to '削除', blog, method: :delete, class: "btn btn-danger", data: { confirm: '本当に削除してよろしいですか？' } %></td>
+        <% else %>
+          <td class="col-xs-1">ー</td>
+          <td class="col-xs-1">ー</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

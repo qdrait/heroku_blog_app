@@ -3,13 +3,15 @@ class BlogsController < ApplicationController
   # before_action :accept_blog, only: [:new, :show, :edit, :update, :destroy]
   # before_action :accept_blog, except: [:index]
   #やっぱりログインしてからblog見れるようにしたいので、下記に。
-  before_action :accept_blog,
+  before_action :accept_blog
 
   def index
     @blogs = Blog.all
+    @favorites = current_user.favorites.all
   end
 
   def show
+    @favorite = current_user.favorites.find_by(blog_id: @blog.id)
   end
 
   def new
@@ -25,7 +27,8 @@ class BlogsController < ApplicationController
 
   def create
     @blog = Blog.new(blog_params)
-
+    @blog.user_id = current_user.id
+    
     if @blog.save
       redirect_to @blog, notice: '作成しました' 
     else
@@ -51,6 +54,7 @@ class BlogsController < ApplicationController
   
   def confirm
     @blog = Blog.new(blog_params)
+    @blog.user_id = current_user.id
     render :new if @blog.invalid?
   end
 
