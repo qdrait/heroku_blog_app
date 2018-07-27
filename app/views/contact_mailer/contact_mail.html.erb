@@ -1,7 +1,11 @@
-<h1>お問い合わせが完了しました！</h1>
+<h1>ブロクの投稿が完了しました！</h1>
 
-<h4>name: <%= @blog.title %></h4>
+<h4>名前: <%= @blog.title %></h4>
 
-<h4>お問い合わせ内容の確認</h4>
+<h4>投稿内容</h4>
 
 <p>content: <%= @blog.content %></p>
+
+<h4>あなたのメールアドレス</h4>
+
+<p>content: <%= @blog.user.email %></p>
