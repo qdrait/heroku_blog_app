@@ -9,6 +9,11 @@
   <strong>Content:</strong>
   <%= @blog.content %>
 </p>
+<p>
+  <strong>CreateUser'sEmail:</strong>
+  <%= @blog.user.email %>
+</p>
+
 
 <% unless @blog.user == current_user %>
   <% if @favorite.present? %>
