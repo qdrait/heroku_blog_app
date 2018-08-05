@@ -54,4 +54,6 @@ Rails.application.configure do
   
   config.action_mailer.default_url_options = { host: 'heroku-blog-app-qdrait.c9users.io:3000' }
   config.action_mailer.delivery_method = :letter_opener
+  
+  # config.consider_all_requests_local = false
 end

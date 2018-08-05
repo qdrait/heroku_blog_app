@@ -14,6 +14,11 @@
   <%= @blog.user.email %>
 </p>
 
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @blog.image %>
+</p>
+
 
 <% unless @blog.user == current_user %>
   <% if @favorite.present? %>

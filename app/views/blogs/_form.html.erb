@@ -21,6 +21,12 @@
     <%= form.text_field :content, id: :blog_content %>
   </div>
 
+  <div class="field">
+    <%= form.label :image %>
+    <%= image_tag(@blog.image.url) if @blog.image.url %>
+    <%= form.file_field :image, id: :blog_image %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
